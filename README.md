@@ -6,9 +6,9 @@ A simple app to track your alcohol level and inform you when you're allowed to d
 
 - Enter your name
 - Select your gender and select your weight
-- Information about the fact that the data are without guarantee(user has to confirm)
-- Possibility to add different types of different drinks in different sizes on a pop up
-- Show a list of all consumed drinks(drink, amount of alcohol)
+- Information about the fact that the data are without guarantee
+- Possibility to add different types of different drinks in different sizes
+- Show a list of all consumed drinks(timestamp, drink, amount)
 - Show the current alcohol level
 - A button to reset all
 - A button to reset a specific drink
@@ -17,9 +17,10 @@ A simple app to track your alcohol level and inform you when you're allowed to d
 - Dark- and white-theme switchable
 
 ## Screens
-- Welcome screen (personal data selection, )
-- Main screen (tracking system, history, button to add new drinks)
-- Add screen (add a new drink)  
+
+- Welcome screen (personal data selection)
+- History screen (tracking system, history, button to add new drinks, button to reset data)
+- Create screen (add a new drink with a specific amount)  
 
 ## Evaluation
 
