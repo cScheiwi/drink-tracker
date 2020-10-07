@@ -1,11 +1,12 @@
-package ch.ost.rj.mge.u01.drinktracker
+package ch.ost.rj.mge.drinktracker.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ch.ost.rj.mge.drinktracker.R
 
-class MainActivity : AppCompatActivity() {
+class CreateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_create)
     }
 }
