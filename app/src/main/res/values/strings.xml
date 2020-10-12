@@ -8,7 +8,7 @@
     <string name="welcome_gender_male">Mann</string>
     <string name="welcome_gender_female">Frau</string>
 
-    <string name="history_attention_text">Achtung: Die Angaben sind ohne Garantie!</string>
+    <string name="history_attention_text">Achtung: Die Angaben sind ohne Gewähr!</string>
     <string name="history_create">Erstellen</string>
     <string name="history_title">Trinkverlauf</string>
     <string name="history_datetime">Zeitpunkt</string>

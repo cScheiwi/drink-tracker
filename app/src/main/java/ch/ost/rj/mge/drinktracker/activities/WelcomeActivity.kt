@@ -1,11 +1,17 @@
 package ch.ost.rj.mge.drinktracker.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import ch.ost.rj.mge.drinktracker.R
+import ch.ost.rj.mge.drinktracker.model.Gender
+import ch.ost.rj.mge.drinktracker.model.Person
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
 
 class WelcomeActivity : AppCompatActivity() {
@@ -20,6 +26,7 @@ class WelcomeActivity : AppCompatActivity() {
     private var weightEditText: EditText? = null
     private var maleRadioButton: RadioButton? = null
     private var femaleRadioButton: RadioButton? = null
+    private var selectedGender: Gender? = null
 
     private var loginButton: View? = null
 
@@ -28,14 +35,33 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         nameEditText = findViewById(R.id.welcome_input_name)
-        //TODO implement addTextChangeListener
+        nameEditText?.addTextChangedListener (object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                updateLoginButton()
+            }
+        })
 
         weightEditText = findViewById(R.id.welcome_weight_picker)
-        //TODO implement addTextChangeListener
+        weightEditText?.addTextChangedListener (object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                updateLoginButton()
+            }
+        })
 
         maleRadioButton = findViewById(R.id.welcome_gender_male)
+        maleRadioButton?.setOnCheckedChangeListener() { compoundButton: CompoundButton, b: Boolean ->
+            selectedGender = Gender.MALE
+            updateLoginButton()
+        }
         femaleRadioButton = findViewById(R.id.welcome_gender_female)
-        //TODO implement addTextChangeListener - only one gender should be selected!
+        femaleRadioButton?.setOnCheckedChangeListener() { compoundButton: CompoundButton, b: Boolean ->
+            selectedGender = Gender.FEMALE
+            updateLoginButton()
+        }
 
         loginButton = findViewById(R.id.welcome_confirm_button)
         loginButton?.setOnClickListener { showHistoryActivity() }
@@ -45,10 +71,10 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun updateLoginButton() {
-        //TODO works?
-        val emailHasError: Boolean = InputVerificationService.hasValidInput(nameEditText)
-        val passwordHasError: Boolean = InputVerificationService.hasValidInput(weightEditText)
-        val buttonIsEnabled = !emailHasError && !passwordHasError
+        val nameEditTextIsValid: Boolean = InputVerificationService.hasValidInput(nameEditText)
+        val weightEditTextIsValid: Boolean = InputVerificationService.hasValidNumberInput(weightEditText)
+        val genderRadioButtonIsValid: Boolean = InputVerificationService.hasValidInput(selectedGender)
+        val buttonIsEnabled = nameEditTextIsValid && weightEditTextIsValid && genderRadioButtonIsValid
         val buttonAlpha: Float = if (buttonIsEnabled) FULL_VISIBLE_ALPHA else HALF_VISIBLE_ALPHA
         loginButton?.isEnabled = buttonIsEnabled
         loginButton?.alpha = buttonAlpha
@@ -56,9 +82,11 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun showHistoryActivity() {
         //TODO implement render to HistoryActivity
-/*        val name: String = nameEditText?.text.toString()
-        val weight: String = weightEditText?.text.toString()
-        val intent: Intent = HistoryActivity.createIntent(this, name, weight)
-        startActivity(intent)*/
+        val name: String = nameEditText?.text.toString()
+        val weight: Int = weightEditText?.text.toString().toInt()
+        val gender: Gender = selectedGender!!
+        val person = Person(name, weight, gender)
+        val intent = Intent(this, HistoryActivity::class.java)
+        startActivity(intent)
     }
 }
