@@ -9,10 +9,13 @@ import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import ch.ost.rj.mge.drinktracker.R
-import ch.ost.rj.mge.drinktracker.model.Gender
-import ch.ost.rj.mge.drinktracker.model.Person
+import ch.ost.rj.mge.drinktracker.entity.Gender
+import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
+import ch.ost.rj.mge.drinktracker.viewModel.WelcomeViewModel
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -27,12 +30,21 @@ class WelcomeActivity : AppCompatActivity() {
     private var maleRadioButton: RadioButton? = null
     private var femaleRadioButton: RadioButton? = null
     private var selectedGender: Gender? = null
+    private lateinit var welcomeViewModel: WelcomeViewModel
 
     private var loginButton: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
+
+        // TODO: 15.10.2020 Fehler suchen
+/*
+        welcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
+        if (welcomeViewModel.user != null) {
+            showHistoryActivity()
+        }
+ */
 
         nameEditText = findViewById(R.id.welcome_input_name)
         nameEditText?.addTextChangedListener (object : TextWatcher {
@@ -53,12 +65,12 @@ class WelcomeActivity : AppCompatActivity() {
         })
 
         maleRadioButton = findViewById(R.id.welcome_gender_male)
-        maleRadioButton?.setOnCheckedChangeListener() { compoundButton: CompoundButton, b: Boolean ->
+        maleRadioButton?.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
             selectedGender = Gender.MALE
             updateLoginButton()
         }
         femaleRadioButton = findViewById(R.id.welcome_gender_female)
-        femaleRadioButton?.setOnCheckedChangeListener() { compoundButton: CompoundButton, b: Boolean ->
+        femaleRadioButton?.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
             selectedGender = Gender.FEMALE
             updateLoginButton()
         }
@@ -67,7 +79,6 @@ class WelcomeActivity : AppCompatActivity() {
         loginButton?.setOnClickListener { showHistoryActivity() }
 
         updateLoginButton()
-
     }
 
     private fun updateLoginButton() {
@@ -81,11 +92,16 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun showHistoryActivity() {
-        //TODO implement render to HistoryActivity
-        val name: String = nameEditText?.text.toString()
-        val weight: Int = weightEditText?.text.toString().toInt()
-        val gender: Gender = selectedGender!!
-        val person = Person(name, weight, gender)
+        /*
+        if (welcomeViewModel.user == null) {
+            val name: String = nameEditText?.text.toString()
+            val weight: Int = weightEditText?.text.toString().toInt()
+            val gender: Gender = selectedGender!!
+            val person = Person(name, weight, gender)
+            welcomeViewModel.insert(person)
+        }
+        */
+
         val intent = Intent(this, HistoryActivity::class.java)
         startActivity(intent)
     }

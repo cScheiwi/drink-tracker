@@ -1,7 +1,7 @@
 package ch.ost.rj.mge.drinktracker.services
 
 import android.widget.EditText
-import ch.ost.rj.mge.drinktracker.model.Gender
+import ch.ost.rj.mge.drinktracker.entity.Gender
 import kotlin.text.*
 
 class InputVerificationService {
