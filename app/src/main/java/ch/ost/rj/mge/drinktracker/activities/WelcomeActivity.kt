@@ -38,13 +38,10 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        // TODO: 15.10.2020 Fehler suchen
-/*
         welcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
-        if (welcomeViewModel.user != null) {
+        if (welcomeViewModel.user.value != null) {
             showHistoryActivity()
         }
- */
 
         nameEditText = findViewById(R.id.welcome_input_name)
         nameEditText?.addTextChangedListener (object : TextWatcher {
@@ -92,15 +89,13 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun showHistoryActivity() {
-        /*
-        if (welcomeViewModel.user == null) {
+        if (welcomeViewModel.user.value == null) {
             val name: String = nameEditText?.text.toString()
             val weight: Int = weightEditText?.text.toString().toInt()
             val gender: Gender = selectedGender!!
             val person = Person(name, weight, gender)
             welcomeViewModel.insert(person)
         }
-        */
 
         val intent = Intent(this, HistoryActivity::class.java)
         startActivity(intent)
