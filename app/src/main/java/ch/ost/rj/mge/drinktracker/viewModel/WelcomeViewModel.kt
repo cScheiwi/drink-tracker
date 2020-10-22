@@ -10,13 +10,12 @@ import ch.ost.rj.mge.drinktracker.repositroy.PersonRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// evt. Saved state module for ViewModels (data survies death of proces, when killed by OS)
 class WelcomeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PersonRepository
-    val user: LiveData<Person>
+    val user: Person?
 
     init {
-        val personDao = DrinkTrackerDatabase.getDatabase(application).personDao()
+        val personDao = DrinkTrackerDatabase.getDatabase(application, viewModelScope).personDao()
         repository = PersonRepository(personDao)
         user = repository.user
     }

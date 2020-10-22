@@ -6,8 +6,8 @@ import ch.ost.rj.mge.drinktracker.entity.Person
 
 @Dao
 interface PersonDao {
-    @Query("SELECT * from person LIMIT 1")
-    fun findPerson(): LiveData<Person>
+    @Query("SELECT * FROM person LIMIT 1")
+    fun findPerson(): Person?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(person: Person)

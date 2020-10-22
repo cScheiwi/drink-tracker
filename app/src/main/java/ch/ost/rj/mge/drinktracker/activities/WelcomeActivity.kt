@@ -15,6 +15,7 @@ import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.entity.Gender
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
+import ch.ost.rj.mge.drinktracker.services.PerMilCalculator
 import ch.ost.rj.mge.drinktracker.viewModel.WelcomeViewModel
 
 class WelcomeActivity : AppCompatActivity() {
@@ -39,7 +40,8 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         welcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
-        if (welcomeViewModel.user.value != null) {
+        // evt. om Splash screen auslagern
+        if (welcomeViewModel.user != null) {
             showHistoryActivity()
         }
 
@@ -89,7 +91,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun showHistoryActivity() {
-        if (welcomeViewModel.user.value == null) {
+        if (welcomeViewModel.user == null) {
             val name: String = nameEditText?.text.toString()
             val weight: Int = weightEditText?.text.toString().toInt()
             val gender: Gender = selectedGender!!

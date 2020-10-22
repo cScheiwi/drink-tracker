@@ -5,7 +5,7 @@ import ch.ost.rj.mge.drinktracker.dao.PersonDao
 import ch.ost.rj.mge.drinktracker.entity.Person
 
 class PersonRepository (private val personDao: PersonDao) {
-    val user : LiveData<Person> = personDao.findPerson()
+    val user : Person? = personDao.findPerson()
 
     fun insert(user : Person) {
         personDao.insert(user)
