@@ -21,7 +21,6 @@ class PerMilCalculator {
 
             var totalGramsOfAlcohol = 0.0
             drinks.forEach {
-                // TODO: 22.10.2020 it.quantity has to bi in cl -> calcualte with it.quantity and it.quantityUnit 
                 val gramsOfAlcoholDrink: Double = it.quantity * it.quantityUnit.toCentiliterMultiplicator * it.percentByVolume * 0.08
                 totalGramsOfAlcohol += gramsOfAlcoholDrink
             }
