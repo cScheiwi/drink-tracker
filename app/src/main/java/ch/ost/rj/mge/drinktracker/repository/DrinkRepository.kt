@@ -1,4 +1,4 @@
-package ch.ost.rj.mge.drinktracker.repositroy
+package ch.ost.rj.mge.drinktracker.repository
 
 import androidx.lifecycle.LiveData
 import ch.ost.rj.mge.drinktracker.dao.DrinkDao

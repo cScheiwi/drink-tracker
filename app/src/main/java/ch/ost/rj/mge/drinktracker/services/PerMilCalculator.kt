@@ -13,15 +13,19 @@ class PerMilCalculator {
         @JvmStatic
         fun calculatePerMil(person: Person, drinks: List<Drink>): Double {
             val bodyLiquid: Double
-            val bodyLiquidMultiplicator: Double = if (person.gender == Gender.MALE)
-                MALE_BODY_LIQUID_MULTIPLICATOR
-            else
-                FEMALE_BODY_LIQUID_MULTIPLICATOR
+            val bodyLiquidMultiplicator: Double =
+                if (person.gender == Gender.MALE) {
+                    MALE_BODY_LIQUID_MULTIPLICATOR
+                } else {
+                    FEMALE_BODY_LIQUID_MULTIPLICATOR
+                }
+
             bodyLiquid = person.weight * bodyLiquidMultiplicator
 
             var totalGramsOfAlcohol = 0.0
             drinks.forEach {
-                val gramsOfAlcoholDrink: Double = it.quantity * it.quantityUnit.toCentiliterMultiplicator * it.percentByVolume * 0.08
+                val gramsOfAlcoholDrink: Double = it.quantity *
+                        it.quantityUnit.toCentiliterMultiplicator * it.percentByVolume * 0.08
                 totalGramsOfAlcohol += gramsOfAlcoholDrink
             }
 

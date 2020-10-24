@@ -11,7 +11,7 @@ class InputVerificationService {
         }
 
         fun hasValidNumberInput(editText: EditText?): Boolean {
-            return editText?.text?.isNotEmpty()!! && editText.text?.toString()?.toIntOrNull()
+            return editText?.text?.isNotEmpty()!! && editText.text?.toString()?.toDoubleOrNull()
                 ?.let { true } == true && editText.error == null
         }
 

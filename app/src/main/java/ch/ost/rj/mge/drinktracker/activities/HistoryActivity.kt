@@ -15,6 +15,9 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
+        // TODO load drinks from database and show in list
+        // TODO maybe change to RecyclerView first? (View is a little bit hacky now)
+
         createButton = findViewById(R.id.history_create)
         createButton?.setOnClickListener { showCreateDialog() }
     }

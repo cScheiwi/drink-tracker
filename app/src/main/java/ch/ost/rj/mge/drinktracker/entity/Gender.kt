@@ -1,5 +1,5 @@
 package ch.ost.rj.mge.drinktracker.entity
 
-enum class Gender() {
+enum class Gender {
     MALE, FEMALE
 }

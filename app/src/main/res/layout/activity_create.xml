@@ -19,10 +19,8 @@
 
     <EditText
         android:id="@+id/create_input_amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="111dp"
+        android:layout_height="39dp"
         android:autofillHints="@string/welcome_input_name_text"
         android:ems="10"
         android:hint="@string/create_input_amount"
@@ -30,7 +28,7 @@
         android:textSize="@dimen/welcome_input_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.436"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,12 +45,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TODO drink picker"
+        android:id="@+id/create_text_unit"
+        android:layout_width="34dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/create_text_unit_initial"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/create_text_unit"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/create_input_amount"
+        app:layout_constraintStart_toEndOf="@+id/create_input_amount"
+        app:layout_constraintTop_toTopOf="@+id/create_input_amount"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <Spinner
+        android:id="@+id/create_drinks_spinner"
+        android:layout_width="160dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/create_input_amount"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

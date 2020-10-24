@@ -11,4 +11,5 @@
     <dimen name="history_alcohol_level">22sp</dimen>
 
     <dimen name="create_title">30sp</dimen>
+    <dimen name="create_text_unit">22sp</dimen>
 </resources>

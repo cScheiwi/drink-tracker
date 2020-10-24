@@ -9,19 +9,18 @@ import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.entity.Gender
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
-import ch.ost.rj.mge.drinktracker.services.PerMilCalculator
 import ch.ost.rj.mge.drinktracker.viewModel.WelcomeViewModel
 
 class WelcomeActivity : AppCompatActivity() {
 
     companion object {
-        private const val MIN_WEIGHT = 40
+        // TODO prio low: maybe check for min weight?
+        // private const val MIN_WEIGHT = 40
         private const val FULL_VISIBLE_ALPHA = 1.0f
         private const val HALF_VISIBLE_ALPHA = 0.5f
     }
@@ -40,7 +39,7 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         welcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
-        // evt. om Splash screen auslagern
+        // TODO prio low: evt. auf Splash screen auslagern
         if (welcomeViewModel.user != null) {
             showHistoryActivity()
         }

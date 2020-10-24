@@ -1,6 +1,5 @@
 package ch.ost.rj.mge.drinktracker.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import ch.ost.rj.mge.drinktracker.entity.Person
 
