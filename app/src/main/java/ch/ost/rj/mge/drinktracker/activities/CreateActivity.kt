@@ -50,7 +50,7 @@ class CreateActivity : AppCompatActivity() {
 
         quantityUnitTextView = findViewById(R.id.create_text_unit)
 
-        drinksSpinner = findViewById(R.id.create_drinks_spinner)
+        drinksSpinner = findViewById(R.id.create_spinner_drinks)
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -71,7 +71,7 @@ class CreateActivity : AppCompatActivity() {
             override fun onNothingSelected(parentView: AdapterView<*>?) {}
         }
 
-        confirmButton = findViewById(R.id.create_confirm_button)
+        confirmButton = findViewById(R.id.create_button_confirm)
         confirmButton?.setOnClickListener { showHistoryActivity() }
 
         alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)

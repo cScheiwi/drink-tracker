@@ -12,25 +12,22 @@
         android:layout_height="60dp"
         android:layout_weight="35"
         android:gravity="center"
-        android:text="@string/history_datetime"
-        android:textAlignment="center" />
+        android:text="@string/history_datetime" />
 
     <TextView
         android:id="@+id/adapter_history_drink_type"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_weight="25"
+        android:layout_weight="30"
         android:gravity="center"
-        android:text="@string/history_drink_type"
-        android:textAlignment="center" />
+        android:text="@string/history_drink_type" />
 
     <TextView
         android:id="@+id/adapter_history_amount"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_weight="40"
+        android:layout_weight="35"
         android:gravity="center"
-        android:text="@string/history_drink_amount"
-        android:textAlignment="center" />
+        android:text="@string/history_drink_amount" />
 
 </LinearLayout>

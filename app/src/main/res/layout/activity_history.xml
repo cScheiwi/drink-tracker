@@ -10,20 +10,20 @@
         android:id="@+id/history_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/history_title"
         android:textAlignment="viewStart"
-        android:textSize="@dimen/history_title"
+        android:textSize="@dimen/app_title"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/history_table_title_linear_layout"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:layout_weight="100"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,34 +31,34 @@
         app:layout_constraintTop_toBottomOf="@+id/history_title">
 
         <TextView
-            android:id="@+id/adapter_history_datetime"
+            android:id="@+id/welcome_history_datetime"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="35"
             android:gravity="center"
             android:text="@string/history_datetime"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/adapter_history_drink_type"
+            android:id="@+id/welcome_history_drink_type"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="25"
+            android:layout_weight="30"
             android:gravity="center"
             android:text="@string/history_drink_type"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/adapter_history_amount"
+            android:id="@+id/welcome_history_amount"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="40"
+            android:layout_weight="35"
             android:gravity="center"
             android:text="@string/history_drink_amount"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -66,26 +66,26 @@
         android:id="@+id/history_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="@string/history_create"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/history_reset_data"
         app:layout_constraintTop_toTopOf="@+id/history_reset_data" />
 
     <Button
         android:id="@+id/history_reset_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/history_reset_data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/history_create"
         app:layout_constraintTop_toBottomOf="@+id/history_alcohol_level_amount" />
 
     <TextView
         android:id="@+id/history_attention_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/history_attention_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,8 +95,8 @@
         android:id="@+id/history_alcohol_total_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/history_alcohol_total_text"
         android:textSize="@dimen/history_alcohol_level"
         android:textStyle="bold"
@@ -107,8 +107,8 @@
         android:id="@+id/history_alcohol_level_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:text="@string/history_alcohol_level_text"
         android:textSize="@dimen/history_alcohol_level"
         app:layout_constraintStart_toEndOf="@+id/history_alcohol_level_text"
@@ -118,21 +118,21 @@
         android:id="@+id/history_alcohol_level_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="0"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/history_text_default_alcohol_level"
         android:textSize="@dimen/history_alcohol_level"
         app:layout_constraintStart_toEndOf="@+id/history_alcohol_total_text"
         app:layout_constraintTop_toBottomOf="@+id/history_drink_list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_drink_list"
-        android:layout_width="411dp"
-        android:layout_height="350dp"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
         app:layout_constraintBottom_toTopOf="@+id/history_alcohol_level_amount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/history_table_title_linear_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
