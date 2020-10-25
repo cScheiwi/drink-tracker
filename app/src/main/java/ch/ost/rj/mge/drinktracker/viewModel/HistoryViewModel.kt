@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import ch.ost.rj.mge.drinktracker.dao.DrinkTrackerDatabase
+import ch.ost.rj.mge.drinktracker.database.DrinkTrackerDatabase
 import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.DrinkTemplate
 import ch.ost.rj.mge.drinktracker.entity.Person

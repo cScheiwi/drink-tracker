@@ -1,4 +1,4 @@
-package ch.ost.rj.mge.drinktracker.dao
+package ch.ost.rj.mge.drinktracker.database
 
 import android.content.Context
 import androidx.room.Database
@@ -7,13 +7,15 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import ch.ost.rj.mge.drinktracker.converter.Converters
+import ch.ost.rj.mge.drinktracker.dao.DrinkDao
+import ch.ost.rj.mge.drinktracker.dao.DrinkTemplateDao
+import ch.ost.rj.mge.drinktracker.dao.PersonDao
 import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.DrinkTemplate
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 import java.util.concurrent.Executors
 
 @Database(
@@ -103,27 +105,6 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
                                 4.0,
                                 QuantityUnit.CENTILITER,
                                 25.0
-                            )
-                        )
-
-
-                        val drinkDao = database.drinkDao()
-                        drinkDao.insert(
-                            Drink(
-                                "Martini",
-                                4.0,
-                                QuantityUnit.CENTILITER,
-                                15.0,
-                                Calendar.getInstance().time
-                            )
-                        )
-                        drinkDao.insert(
-                            Drink(
-                                "Bier",
-                                3.0,
-                                QuantityUnit.DECILITER,
-                                5.0,
-                                Calendar.getInstance().time
                             )
                         )
                     }

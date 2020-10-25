@@ -3,7 +3,7 @@ package ch.ost.rj.mge.drinktracker.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import ch.ost.rj.mge.drinktracker.dao.DrinkTrackerDatabase
+import ch.ost.rj.mge.drinktracker.database.DrinkTrackerDatabase
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.repository.PersonRepository
 import kotlinx.coroutines.Dispatchers
