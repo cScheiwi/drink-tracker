@@ -21,6 +21,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     private val drinkTemplateRepository: DrinkTemplateRepository
 
     // wird für notification gebraucht
+    val userLive: LiveData<Person>
     val user: Person?
 
     // drinks sollten automatisch neu geladen werden, wenn in DB hinzugefügt
@@ -31,6 +32,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     init {
         val personDao = DrinkTrackerDatabase.getDatabase(application, viewModelScope).personDao()
         personRepository = PersonRepository(personDao)
+        userLive = personRepository.liveUser
         user = personRepository.user
 
         val drinkDao = DrinkTrackerDatabase.getDatabase(application, viewModelScope).drinkDao()
@@ -67,4 +69,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         return drinkTemplateRepository.getAllNames()
     }
 
+    fun updateUser(user: Person) {
+        personRepository.update(user)
+    }
 }

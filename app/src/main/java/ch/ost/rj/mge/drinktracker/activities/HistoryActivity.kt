@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.adapter.DrinkListAdapter
-import ch.ost.rj.mge.drinktracker.services.PerMilCalculator
 import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 
 class HistoryActivity : AppCompatActivity() {
@@ -33,7 +32,12 @@ class HistoryActivity : AppCompatActivity() {
 
         historyViewModel.drinks.observe(this, Observer { drinks ->
             drinks?.let {adapter.setDrinks(it)}
-            updatePerMil()
+        })
+
+        historyViewModel.userLive.observe(this, Observer {
+            val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
+            val perMil = "%.2f".format(it.perMil).toDouble()
+            alcoholLevel.text = perMil.toString()
         })
 
         createButton = findViewById(R.id.history_create)
@@ -43,14 +47,11 @@ class HistoryActivity : AppCompatActivity() {
         deleteAllButton?.setOnClickListener{deleteAllDrinks()}
     }
 
-    private fun updatePerMil() {
-        val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
-        val perMil = PerMilCalculator.calculatePerMil(historyViewModel.user!!, historyViewModel.drinks.value!!)
-        alcoholLevel.text = perMil.toString()
-    }
-
     private fun deleteAllDrinks() {
         historyViewModel.deleteAllDrinks()
+        val user: ch.ost.rj.mge.drinktracker.entity.Person = historyViewModel.user!!
+        user.perMil = 0.0
+        historyViewModel.updateUser(user)
     }
 
     private fun showCreateDialog() {

@@ -11,11 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.entity.Drink
+import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
+import ch.ost.rj.mge.drinktracker.services.PerMilCalculator
 import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 import java.util.*
-
 
 class CreateActivity : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class CreateActivity : AppCompatActivity() {
     private var quantityUnit: QuantityUnit? = null
 
     private var confirmButton: View? = null
+    private var alcoholLevel: TextView? = null
 
     private var currentDrinkName: String? = null
 
@@ -50,24 +52,29 @@ class CreateActivity : AppCompatActivity() {
 
         drinksSpinner = findViewById(R.id.create_drinks_spinner)
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                historyViewModel.getAllDrinkTemplateNames())
+            this,
+            android.R.layout.simple_spinner_item,
+            historyViewModel.getAllDrinkTemplateNames()
+        )
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         drinksSpinner?.adapter = spinnerArrayAdapter
 
 
         drinksSpinner?.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View,
-                                        position: Int, id: Long
+            override fun onItemSelected(
+                parentView: AdapterView<*>?, selectedItemView: View,
+                position: Int, id: Long
             ) {
                 updateQuantityAndUnit()
             }
+
             override fun onNothingSelected(parentView: AdapterView<*>?) {}
         }
 
         confirmButton = findViewById(R.id.create_confirm_button)
         confirmButton?.setOnClickListener { showHistoryActivity() }
+
+        alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
 
         updateQuantityAndUnit()
         updateCreateButton()
@@ -77,7 +84,8 @@ class CreateActivity : AppCompatActivity() {
 
         currentDrinkName = drinksSpinner?.selectedItem.toString()
         val currentQuantity: Double = historyViewModel.getQuantityByName(currentDrinkName!!)
-        val currentQuantityUnit: QuantityUnit = historyViewModel.getQuantityUnitByName(currentDrinkName!!)
+        val currentQuantityUnit: QuantityUnit =
+            historyViewModel.getQuantityUnitByName(currentDrinkName!!)
 
         quantityEditText?.setText(currentQuantity.toString())
         quantityUnitTextView?.text = currentQuantityUnit.shortName
@@ -100,11 +108,22 @@ class CreateActivity : AppCompatActivity() {
             currentDrinkName.toString(),
             quantityEditText?.text.toString().toDouble(),
             quantityUnit!!,
-            historyViewModel.getPercentByVolumeByName(currentDrinkName.toString()), // here
-            Calendar.getInstance().time)
+            historyViewModel.getPercentByVolumeByName(currentDrinkName.toString()),
+            Calendar.getInstance().time
+        )
         historyViewModel.insertDrink(drink)
+
+        updatePerMil(drink)
 
         val intent = Intent(this, HistoryActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun updatePerMil(drink: Drink) {
+        val user: Person = historyViewModel.user!!
+        val perMil = PerMilCalculator.calculatePerMil(user, drink)
+        user.perMil += perMil
+        historyViewModel.updateUser(user)
+        alcoholLevel?.text =  perMil.toString()
     }
 }

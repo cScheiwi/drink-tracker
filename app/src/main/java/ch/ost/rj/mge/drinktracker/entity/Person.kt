@@ -13,4 +13,6 @@ data class Person(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    @ColumnInfo(name = "perMil")
+    var perMil: Double = 0.0
 }
