@@ -9,6 +9,7 @@ class PerMilCalculator {
     companion object {
         private const val MALE_BODY_LIQUID_MULTIPLICATOR = 0.8
         private const val FEMALE_BODY_LIQUID_MULTIPLICATOR = 0.7
+        private const val SAFTY_PERMIL_MULTIPLICATOR = 1.2
 
         @JvmStatic
         fun calculatePerMil(person: Person, drinks: List<Drink>): Double {
@@ -29,7 +30,7 @@ class PerMilCalculator {
                 totalGramsOfAlcohol += gramsOfAlcoholDrink
             }
 
-            return totalGramsOfAlcohol / bodyLiquid
+            return "%.2f".format((totalGramsOfAlcohol / bodyLiquid) * SAFTY_PERMIL_MULTIPLICATOR).toDouble()
         }
     }
 }

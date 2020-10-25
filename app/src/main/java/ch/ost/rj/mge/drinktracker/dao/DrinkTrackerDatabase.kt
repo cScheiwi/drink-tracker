@@ -13,6 +13,7 @@ import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 import java.util.concurrent.Executors
 
 @Database(
@@ -102,6 +103,27 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
                                 4.0,
                                 QuantityUnit.CENTILITER,
                                 25.0
+                            )
+                        )
+
+
+                        val drinkDao = database.drinkDao()
+                        drinkDao.insert(
+                            Drink(
+                                "Martini",
+                                4.0,
+                                QuantityUnit.CENTILITER,
+                                15.0,
+                                Calendar.getInstance().time
+                            )
+                        )
+                        drinkDao.insert(
+                            Drink(
+                                "Bier",
+                                3.0,
+                                QuantityUnit.DECILITER,
+                                5.0,
+                                Calendar.getInstance().time
                             )
                         )
                     }
