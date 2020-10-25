@@ -5,11 +5,11 @@ import ch.ost.rj.mge.drinktracker.entity.Gender
 import ch.ost.rj.mge.drinktracker.entity.Person
 
 // https://www.plakos.de/promillerechner/
-class PerMilCalculator {
+class PerMilCalculatorService {
     companion object {
         private const val MALE_BODY_LIQUID_MULTIPLICATOR = 0.8
         private const val FEMALE_BODY_LIQUID_MULTIPLICATOR = 0.7
-        private const val SAFTY_PERMIL_MULTIPLICATOR = 1.2
+        private const val SAFETY_PER_MIL_MULTIPLICATOR = 1.2
 
         @JvmStatic
         fun calculatePerMil(person: Person, drink: Drink): Double {
@@ -28,7 +28,7 @@ class PerMilCalculator {
                     drink.quantityUnit.toCentiliterMultiplicator * drink.percentByVolume * 0.08
             totalGramsOfAlcohol += gramsOfAlcoholDrink
 
-            return (totalGramsOfAlcohol / bodyLiquid) * SAFTY_PERMIL_MULTIPLICATOR
+            return (totalGramsOfAlcohol / bodyLiquid) * SAFETY_PER_MIL_MULTIPLICATOR
         }
     }
 }

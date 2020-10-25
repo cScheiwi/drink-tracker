@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import ch.ost.rj.mge.drinktracker.dao.PersonDao
 import ch.ost.rj.mge.drinktracker.entity.Person
 
-class PersonRepository (private val personDao: PersonDao) {
-    val user : Person? = personDao.findPerson()
-    val liveUser : LiveData<Person> = personDao.findPersonLiveData()
+class PersonRepository(private val personDao: PersonDao) {
+    val user: Person? = personDao.findPerson()
+    val liveUser: LiveData<Person> = personDao.findPersonLiveData()
 
-    fun insert(user : Person) {
+    fun insert(user: Person) {
         personDao.insert(user)
     }
 

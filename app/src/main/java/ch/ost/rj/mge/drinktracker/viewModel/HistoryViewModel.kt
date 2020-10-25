@@ -27,7 +27,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     // drinks sollten automatisch neu geladen werden, wenn in DB hinzugefügt
     val drinks: LiveData<List<Drink>>
 
-    val drinkTemplates: List<DrinkTemplate>
+    private val drinkTemplates: List<DrinkTemplate>
 
     init {
         val personDao = DrinkTrackerDatabase.getDatabase(application, viewModelScope).personDao()

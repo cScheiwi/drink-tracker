@@ -6,8 +6,8 @@ enum class QuantityUnit(val toCentiliterMultiplicator: Double, val shortName: St
     CENTILITER(1.0, "cl"),
     MILLILITER(0.1, "ml");
 
-    companion object {
+/*    companion object {
         private val map = values().associateBy(QuantityUnit::shortName)
         fun fromShortName(shortName: String) = map[shortName]
-    }
+    }*/
 }

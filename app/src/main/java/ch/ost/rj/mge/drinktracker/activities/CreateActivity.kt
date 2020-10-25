@@ -14,7 +14,7 @@ import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
-import ch.ost.rj.mge.drinktracker.services.PerMilCalculator
+import ch.ost.rj.mge.drinktracker.services.PerMilCalculatorService
 import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 import java.util.*
 
@@ -121,7 +121,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun updatePerMil(drink: Drink) {
         val user: Person = historyViewModel.user!!
-        val perMil = PerMilCalculator.calculatePerMil(user, drink)
+        val perMil = PerMilCalculatorService.calculatePerMil(user, drink)
         user.perMil += perMil
         historyViewModel.updateUser(user)
         alcoholLevel?.text =  perMil.toString()
