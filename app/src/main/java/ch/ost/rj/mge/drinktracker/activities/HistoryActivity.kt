@@ -17,6 +17,7 @@ import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 class HistoryActivity : AppCompatActivity() {
 
     private var createButton: View? = null
+    private var deleteAllButton: View? = null
     private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +38,19 @@ class HistoryActivity : AppCompatActivity() {
 
         createButton = findViewById(R.id.history_create)
         createButton?.setOnClickListener { showCreateDialog() }
+
+        deleteAllButton = findViewById(R.id.history_reset_data)
+        deleteAllButton?.setOnClickListener{deleteAllDrinks()}
     }
 
     private fun updatePerMil() {
         val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
         val perMil = PerMilCalculator.calculatePerMil(historyViewModel.user!!, historyViewModel.drinks.value!!)
         alcoholLevel.text = perMil.toString()
+    }
+
+    private fun deleteAllDrinks() {
+        historyViewModel.deleteAllDrinks()
     }
 
     private fun showCreateDialog() {

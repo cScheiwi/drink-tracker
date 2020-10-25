@@ -46,4 +46,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         drinkRepository.insert(drink)
     }
 
+    fun deleteAllDrinks() {
+        drinkRepository.deleteAll()
+    }
 }
