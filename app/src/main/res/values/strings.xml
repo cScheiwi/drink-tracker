@@ -2,7 +2,7 @@
     <string name="app_name">Drink Tracker</string>
     <string name="app_confirm_button">Bestätigen</string>
 
-    <string name="welcome_developers_text">by Christoph &amp; Jonas</string>
+    <string name="welcome_developers_text">von Christoph &amp; Jonas</string>
     <string name="welcome_input_name_text">Name</string>
     <string name="welcome_weight_text">Gewicht</string>
     <string name="welcome_gender_male">Mann</string>
@@ -12,21 +12,15 @@
     <string name="history_create">Erstellen</string>
     <string name="history_title">Trinkverlauf</string>
     <string name="history_datetime">Zeitpunkt</string>
-    <string name="history_drink_type">Drink</string>
+    <string name="history_drink_type">Getränk</string>
     <string name="history_drink_amount">Menge</string>
-    <string name="history_reset_data">Drinks löschen</string>
+    <string name="history_reset_data">Getränke löschen</string>
     <string name="history_alcohol_total_text">Total:</string>
     <string name="history_alcohol_level_text">Promille</string>
+    <string name="history_text_default_alcohol_level">0</string>
 
-    <string name="create_title">Drink eintragen</string>
-    <string name="create_select_drink">Drink auswählen</string>
+    <string name="create_title">Getränk eintragen</string>
+    <string name="create_select_drink">Getränk auswählen</string>
     <string name="create_input_amount">Menge</string>
     <string name="create_text_unit_initial">dl</string>
-
-    <string-array name="drinks_array">
-        <item>Bier</item>
-        <item>Wein</item>
-        <item>Cocktail</item>
-    </string-array>
-
 </resources>

@@ -6,49 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".activities.CreateActivity">
 
-    <Button
-        android:id="@+id/create_confirm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/app_confirm_button"
-        android:textSize="@dimen/app_confirm_button_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/create_input_amount"
-        android:layout_width="111dp"
-        android:layout_height="39dp"
-        android:autofillHints="@string/welcome_input_name_text"
-        android:ems="10"
-        android:hint="@string/create_input_amount"
-        android:inputType="numberDecimal"
-        android:textSize="@dimen/welcome_input_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/create_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="24dp"
         android:text="@string/create_title"
-        android:textSize="@dimen/create_title"
+        android:textSize="@dimen/app_title"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/create_spinner_drinks"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_input_amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/create_input_amount"
+        android:layout_width="84dp"
+        android:layout_height="46dp"
+        android:autofillHints="@string/welcome_input_name_text"
+        android:ems="10"
+        android:hint="@string/create_input_amount"
+        android:inputType="numberDecimal"
+        android:textSize="@dimen/welcome_input"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
     <TextView
         android:id="@+id/create_text_unit"
         android:layout_width="34dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="@string/create_text_unit_initial"
         android:textAlignment="viewStart"
         android:textSize="@dimen/create_text_unit"
@@ -56,16 +56,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/create_input_amount"
         app:layout_constraintStart_toEndOf="@+id/create_input_amount"
         app:layout_constraintTop_toTopOf="@+id/create_input_amount"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintVertical_bias="0.466" />
 
-    <Spinner
-        android:id="@+id/create_drinks_spinner"
-        android:layout_width="160dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/create_input_amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/create_button_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/app_confirm_button"
+        android:textSize="@dimen/app_confirm_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

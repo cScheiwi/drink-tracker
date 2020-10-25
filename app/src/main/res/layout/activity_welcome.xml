@@ -10,9 +10,9 @@
         android:id="@+id/welcome_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="48dp"
         android:text="@string/app_name"
-        android:textSize="@dimen/welcome_title_size"
+        android:textSize="@dimen/app_title"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,13 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/welcome_developers_text"
-        android:textSize="@dimen/welcome_developers_text_size"
+        android:textSize="@dimen/welcome_developers_text"
         app:layout_constraintEnd_toEndOf="@+id/welcome_app_title"
         app:layout_constraintStart_toStartOf="@+id/welcome_app_title"
         app:layout_constraintTop_toBottomOf="@+id/welcome_app_title" />
 
     <EditText
-        android:id="@+id/welcome_input_name"
+        android:id="@+id/welcome_name_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -39,7 +39,7 @@
         android:ems="10"
         android:hint="@string/welcome_input_name_text"
         android:inputType="textPersonName"
-        android:textSize="@dimen/welcome_input_size"
+        android:textSize="@dimen/welcome_input"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,20 +51,20 @@
         android:id="@+id/welcome_weight_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/welcome_weight_text"
         android:inputType="numberDecimal"
-        android:textSize="@dimen/welcome_input_size"
-        app:layout_constraintEnd_toEndOf="@+id/welcome_input_name"
-        app:layout_constraintStart_toStartOf="@+id/welcome_input_name"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_input_name" />
+        android:textSize="@dimen/welcome_input"
+        app:layout_constraintEnd_toEndOf="@+id/welcome_name_input"
+        app:layout_constraintStart_toStartOf="@+id/welcome_name_input"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_name_input" />
 
     <RadioGroup
-        android:id="@+id/radio_group_gender"
+        android:id="@+id/welcome_gender_radio_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/welcome_weight_picker"
         app:layout_constraintStart_toStartOf="@+id/welcome_weight_picker"
@@ -97,7 +97,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:text="@string/app_confirm_button"
-        android:textSize="@dimen/app_confirm_button_size"
+        android:textSize="@dimen/app_confirm_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
