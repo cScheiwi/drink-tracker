@@ -21,8 +21,8 @@ class WelcomeActivity : AppCompatActivity() {
     companion object {
         // TODO prio low: maybe check for min weight?
         // private const val MIN_WEIGHT = 40
-        private const val FULL_VISIBLE_ALPHA = 1.0f
-        private const val HALF_VISIBLE_ALPHA = 0.5f
+        const val FULL_VISIBLE_ALPHA = 1.0f
+        const val HALF_VISIBLE_ALPHA = 0.5f
     }
 
     private var nameEditText: EditText? = null

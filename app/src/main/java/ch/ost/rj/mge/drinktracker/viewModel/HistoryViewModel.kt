@@ -8,6 +8,7 @@ import ch.ost.rj.mge.drinktracker.dao.DrinkTrackerDatabase
 import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.DrinkTemplate
 import ch.ost.rj.mge.drinktracker.entity.Person
+import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import ch.ost.rj.mge.drinktracker.repository.DrinkRepository
 import ch.ost.rj.mge.drinktracker.repository.DrinkTemplateRepository
 import ch.ost.rj.mge.drinktracker.repository.PersonRepository
@@ -49,4 +50,21 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     fun deleteAllDrinks() {
         drinkRepository.deleteAll()
     }
+
+    fun getQuantityByName(name: String): Double {
+        return drinkTemplateRepository.getQuantityByName(name)
+    }
+
+    fun getQuantityUnitByName(name: String): QuantityUnit {
+        return drinkTemplateRepository.getQuantityUnitByName(name)
+    }
+
+    fun getPercentByVolumeByName(name: String): Double {
+        return drinkTemplateRepository.getPercentByVolumeByName(name)
+    }
+
+    fun getAllDrinkTemplateNames(): List<String> {
+        return drinkTemplateRepository.getAllNames()
+    }
+
 }

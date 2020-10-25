@@ -1,31 +1,33 @@
 package ch.ost.rj.mge.drinktracker.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
 import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
-import java.util.Calendar
+import java.util.*
+
 
 class CreateActivity : AppCompatActivity() {
 
-    companion object {
-        private const val FULL_VISIBLE_ALPHA = 1.0f
-        private const val HALF_VISIBLE_ALPHA = 0.5f
-    }
-
     private var drinksSpinner: Spinner? = null
+
     private var quantityEditText: EditText? = null
     private var quantityUnitTextView: TextView? = null
     private var quantityUnit: QuantityUnit? = null
+
     private var confirmButton: View? = null
+
+    private var currentDrinkName: String? = null
 
     private lateinit var historyViewModel: HistoryViewModel
 
@@ -33,8 +35,9 @@ class CreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
 
+        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
+
         quantityEditText = findViewById(R.id.create_input_amount)
-        quantityEditText?.setText("3.3")
         quantityEditText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -43,46 +46,61 @@ class CreateActivity : AppCompatActivity() {
             }
         })
 
-        // TODO load this data from database with CursorAdapter, rather than static from resources
-        // https://developer.android.com/guide/topics/ui/controls/spinner
-        drinksSpinner = findViewById(R.id.create_drinks_spinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.drinks_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            drinksSpinner?.adapter = adapter
-        }
-
         quantityUnitTextView = findViewById(R.id.create_text_unit)
-        quantityUnit = quantityUnitTextView?.text?.toString()?.let { QuantityUnit.fromShortName(it) }
+
+        drinksSpinner = findViewById(R.id.create_drinks_spinner)
+        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                historyViewModel.getAllDrinkTemplateNames())
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        drinksSpinner?.adapter = spinnerArrayAdapter
+
+
+        drinksSpinner?.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View,
+                                        position: Int, id: Long
+            ) {
+                updateQuantityAndUnit()
+            }
+            override fun onNothingSelected(parentView: AdapterView<*>?) {}
+        }
 
         confirmButton = findViewById(R.id.create_confirm_button)
         confirmButton?.setOnClickListener { showHistoryActivity() }
 
+        updateQuantityAndUnit()
         updateCreateButton()
+    }
+
+    private fun updateQuantityAndUnit() {
+
+        currentDrinkName = drinksSpinner?.selectedItem.toString()
+        val currentQuantity: Double = historyViewModel.getQuantityByName(currentDrinkName!!)
+        val currentQuantityUnit: QuantityUnit = historyViewModel.getQuantityUnitByName(currentDrinkName!!)
+
+        quantityEditText?.setText(currentQuantity.toString())
+        quantityUnitTextView?.text = currentQuantityUnit.shortName
+
+        quantityUnit = currentQuantityUnit
     }
 
     private fun updateCreateButton() {
         val amountEditTextIsValid: Boolean =
             InputVerificationService.hasValidNumberInput(quantityEditText)
-        val buttonAlpha: Float = if (amountEditTextIsValid) FULL_VISIBLE_ALPHA else HALF_VISIBLE_ALPHA
+        val buttonAlpha: Float = if (amountEditTextIsValid)
+            WelcomeActivity.FULL_VISIBLE_ALPHA else WelcomeActivity.HALF_VISIBLE_ALPHA
         confirmButton?.isEnabled = amountEditTextIsValid
         confirmButton?.alpha = buttonAlpha
     }
 
     private fun showHistoryActivity() {
 
-        val quantity: Double = quantityEditText?.text.toString().toDouble()
-        // TODO set data according to selected drinkTemplate (default beer)
         val drink = Drink(
-            "Test", // here
-            quantity,
+            currentDrinkName.toString(),
+            quantityEditText?.text.toString().toDouble(),
             quantityUnit!!,
-            20.0, // here
+            historyViewModel.getPercentByVolumeByName(currentDrinkName.toString()), // here
             Calendar.getInstance().time)
         historyViewModel.insertDrink(drink)
 
