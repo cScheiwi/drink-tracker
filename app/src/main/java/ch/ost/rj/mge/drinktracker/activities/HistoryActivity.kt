@@ -20,7 +20,9 @@ import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 class HistoryActivity : AppCompatActivity() {
 
     companion object {
-        const val AMOUNT_OF_REDUCES_PER_HOUR = 4
+        // TODO: 26.10.2020 auf original zurückstellen
+        // const val AMOUNT_OF_REDUCES_PER_HOUR = 4
+        const val AMOUNT_OF_REDUCES_PER_HOUR = 60
     }
 
     private var createButton: View? = null
@@ -46,6 +48,9 @@ class HistoryActivity : AppCompatActivity() {
             val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
             val perMil = "%.2f".format(it.perMil).toDouble()
             alcoholLevel.text = perMil.toString()
+            if (it.perMil > 0) {
+                scheduleAlcoholReducer()
+            }
         })
 
         createButton = findViewById(R.id.history_create)
@@ -53,8 +58,6 @@ class HistoryActivity : AppCompatActivity() {
 
         deleteAllButton = findViewById(R.id.history_reset_data)
         deleteAllButton?.setOnClickListener { deleteAllDrinks() }
-
-        scheduleAlcoholReducer()
     }
 
     private fun deleteAllDrinks() {
@@ -67,32 +70,30 @@ class HistoryActivity : AppCompatActivity() {
     private fun scheduleAlcoholReducer() {
         val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
 
-        val pIntent = PendingIntent.getBroadcast(
-            this,
-            AlcoholReducerAlarmReceiver.REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        // TODO: 26.10.2020  implement reactivation
+        if (PendingIntent.getBroadcast(
+                applicationContext,
+                AlcoholReducerAlarmReceiver.REQUEST_CODE,
+                intent,
+                PendingIntent.FLAG_NO_CREATE
+            ) == null
+        ) {
+            val pIntent = PendingIntent.getBroadcast(
+                this,
+                AlcoholReducerAlarmReceiver.REQUEST_CODE,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
-        val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarm.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis(),
-            (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),
-            pIntent
-        )
+            val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarm.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis(),
+                (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),
+                pIntent
+            )
+        }
     }
-
-/*    fun cancelAlcoholReducer() {
-        val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
-        val pIntent = PendingIntent.getBroadcast(
-            this, AlcoholReducerAlarmReceiver.REQUEST_CODE,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarm =
-            this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarm.cancel(pIntent)
-    }*/
 
     private fun showCreateDialog() {
         val intent = Intent(this, CreateActivity::class.java)

@@ -24,7 +24,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     val userLive: LiveData<Person>
     val user: Person?
 
-    // drinks sollten automatisch neu geladen werden, wenn in DB hinzugefügt
+    // drinks werden automatisch neu geladen werden, wenn in DB hinzugefügt
     val drinks: LiveData<List<Drink>>
 
     private val drinkTemplates: List<DrinkTemplate>
