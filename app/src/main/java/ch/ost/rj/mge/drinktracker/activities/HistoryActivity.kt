@@ -20,8 +20,6 @@ import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
 class HistoryActivity : AppCompatActivity() {
 
     companion object {
-        // TODO: 26.10.2020 auf original zurückstellen
-        // const val AMOUNT_OF_REDUCES_PER_HOUR = 4
         const val AMOUNT_OF_REDUCES_PER_HOUR = 60
     }
 
@@ -48,9 +46,10 @@ class HistoryActivity : AppCompatActivity() {
             val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
             val perMil = "%.2f".format(it.perMil).toDouble()
             alcoholLevel.text = perMil.toString()
-            if (it.perMil > 0) {
+            // TODO 1 (optional): only start alcohol reducer if alcohol level is higher than zero
+/*            if (it.perMil > 0) {
                 scheduleAlcoholReducer()
-            }
+            }*/
         })
 
         createButton = findViewById(R.id.history_create)
@@ -58,6 +57,8 @@ class HistoryActivity : AppCompatActivity() {
 
         deleteAllButton = findViewById(R.id.history_reset_data)
         deleteAllButton?.setOnClickListener { deleteAllDrinks() }
+
+        scheduleAlcoholReducer()
     }
 
     private fun deleteAllDrinks() {
@@ -70,14 +71,14 @@ class HistoryActivity : AppCompatActivity() {
     private fun scheduleAlcoholReducer() {
         val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
 
-        // TODO: 26.10.2020  implement reactivation
-        if (PendingIntent.getBroadcast(
+          // TODO 1 (optional): implement reactivation properly
+/*        if (PendingIntent.getBroadcast(
                 applicationContext,
                 AlcoholReducerAlarmReceiver.REQUEST_CODE,
                 intent,
                 PendingIntent.FLAG_NO_CREATE
             ) == null
-        ) {
+        ) {*/
             val pIntent = PendingIntent.getBroadcast(
                 this,
                 AlcoholReducerAlarmReceiver.REQUEST_CODE,
@@ -92,7 +93,7 @@ class HistoryActivity : AppCompatActivity() {
                 (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),
                 pIntent
             )
-        }
+//        }
     }
 
     private fun showCreateDialog() {

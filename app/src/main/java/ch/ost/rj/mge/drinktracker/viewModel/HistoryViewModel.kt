@@ -20,11 +20,9 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     private val drinkRepository: DrinkRepository
     private val drinkTemplateRepository: DrinkTemplateRepository
 
-    // wird für notification gebraucht
     val userLive: LiveData<Person>
     val user: Person?
 
-    // drinks werden automatisch neu geladen werden, wenn in DB hinzugefügt
     val drinks: LiveData<List<Drink>>
 
     private val drinkTemplates: List<DrinkTemplate>

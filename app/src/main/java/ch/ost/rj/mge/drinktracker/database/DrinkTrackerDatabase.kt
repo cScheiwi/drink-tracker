@@ -45,30 +45,6 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
 
                         drinkTemplateDao.insert(
                             DrinkTemplate(
-                                "Martini",
-                                4.0,
-                                QuantityUnit.CENTILITER,
-                                15.0
-                            )
-                        )
-                        drinkTemplateDao.insert(
-                            DrinkTemplate(
-                                "Campari",
-                                4.0,
-                                QuantityUnit.CENTILITER,
-                                21.0
-                            )
-                        )
-                        drinkTemplateDao.insert(
-                            DrinkTemplate(
-                                "Ricard",
-                                2.0,
-                                QuantityUnit.CENTILITER,
-                                45.0
-                            )
-                        )
-                        drinkTemplateDao.insert(
-                            DrinkTemplate(
                                 "Bier",
                                 3.3,
                                 QuantityUnit.DECILITER,
@@ -85,7 +61,23 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
                         )
                         drinkTemplateDao.insert(
                             DrinkTemplate(
-                                "Gognac",
+                                "Martini",
+                                4.0,
+                                QuantityUnit.CENTILITER,
+                                15.0
+                            )
+                        )
+                        drinkTemplateDao.insert(
+                            DrinkTemplate(
+                                "Campari",
+                                4.0,
+                                QuantityUnit.CENTILITER,
+                                21.0
+                            )
+                        )
+                        drinkTemplateDao.insert(
+                            DrinkTemplate(
+                                "Cognac",
                                 2.5,
                                 QuantityUnit.CENTILITER,
                                 40.0
@@ -101,10 +93,26 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
                         )
                         drinkTemplateDao.insert(
                             DrinkTemplate(
+                                "Kirsch",
+                                2.5,
+                                QuantityUnit.CENTILITER,
+                                40.0
+                            )
+                        )
+                        drinkTemplateDao.insert(
+                            DrinkTemplate(
                                 "Cocktails",
                                 4.0,
                                 QuantityUnit.CENTILITER,
                                 25.0
+                            )
+                        )
+                        drinkTemplateDao.insert(
+                            DrinkTemplate(
+                                "Wasser",
+                                1.0,
+                                QuantityUnit.LITER,
+                                0.0
                             )
                         )
                     }
