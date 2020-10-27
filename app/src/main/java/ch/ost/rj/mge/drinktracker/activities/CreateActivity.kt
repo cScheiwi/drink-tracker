@@ -15,7 +15,7 @@ import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
 import ch.ost.rj.mge.drinktracker.services.PerMilCalculatorService
-import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
+import ch.ost.rj.mge.drinktracker.viewmodel.HistoryViewModel
 import java.util.*
 
 class CreateActivity : AppCompatActivity() {
@@ -59,7 +59,6 @@ class CreateActivity : AppCompatActivity() {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         drinksSpinner?.adapter = spinnerArrayAdapter
 
-
         drinksSpinner?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>?, selectedItemView: View,
@@ -74,14 +73,13 @@ class CreateActivity : AppCompatActivity() {
         confirmButton = findViewById(R.id.create_button_confirm)
         confirmButton?.setOnClickListener { showHistoryActivity() }
 
-        alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
+        alcoholLevel = findViewById(R.id.history_alcohol_level_text)
 
         updateQuantityAndUnit()
         updateCreateButton()
     }
 
     private fun updateQuantityAndUnit() {
-
         currentDrinkName = drinksSpinner?.selectedItem.toString()
         val currentQuantity: Double = historyViewModel.getQuantityByName(currentDrinkName!!)
         val currentQuantityUnit: QuantityUnit =
@@ -102,8 +100,15 @@ class CreateActivity : AppCompatActivity() {
         confirmButton?.alpha = buttonAlpha
     }
 
-    private fun showHistoryActivity() {
+    private fun updatePerMil(drink: Drink) {
+        val user: Person = historyViewModel.user!!
+        val perMil = PerMilCalculatorService.calculatePerMil(user, drink)
+        user.perMil += perMil
+        historyViewModel.updateUser(user)
+        alcoholLevel?.text = perMil.toString()
+    }
 
+    private fun showHistoryActivity() {
         val drink = Drink(
             currentDrinkName.toString(),
             quantityEditText?.text.toString().toDouble(),
@@ -117,13 +122,5 @@ class CreateActivity : AppCompatActivity() {
 
         val intent = Intent(this, HistoryActivity::class.java)
         startActivity(intent)
-    }
-
-    private fun updatePerMil(drink: Drink) {
-        val user: Person = historyViewModel.user!!
-        val perMil = PerMilCalculatorService.calculatePerMil(user, drink)
-        user.perMil += perMil
-        historyViewModel.updateUser(user)
-        alcoholLevel?.text =  perMil.toString()
     }
 }

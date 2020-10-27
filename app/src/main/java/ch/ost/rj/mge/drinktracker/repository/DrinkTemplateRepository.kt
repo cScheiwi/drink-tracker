@@ -5,7 +5,7 @@ import ch.ost.rj.mge.drinktracker.entity.Drink
 import ch.ost.rj.mge.drinktracker.entity.DrinkTemplate
 import ch.ost.rj.mge.drinktracker.entity.QuantityUnit
 
-class DrinkTemplateRepository (private val drinkTemplateDao: DrinkTemplateDao) {
+class DrinkTemplateRepository(private val drinkTemplateDao: DrinkTemplateDao) {
     val drinkTemplates: List<DrinkTemplate> = drinkTemplateDao.findDrinkTemplates()
 
     fun getAllNames(): List<String> {
@@ -22,9 +22,5 @@ class DrinkTemplateRepository (private val drinkTemplateDao: DrinkTemplateDao) {
 
     fun getPercentByVolumeByName(name: String): Double {
         return drinkTemplateDao.getPercentByVolumeByName(name)
-    }
-
-    fun deleteAll() {
-        drinkTemplateDao.deleteAll()
     }
 }

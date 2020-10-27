@@ -1,7 +1,6 @@
 package ch.ost.rj.mge.drinktracker.services
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -29,12 +28,12 @@ class AlcoholReducerService : IntentService("AlcoholReducer") {
         val person: Person = db.personDao().findPerson()!!
 
         var alcoholLevel: Double = person.perMil
-        val alcoholLevelOld = alcoholLevel
+        val alcoholLevelBefore = alcoholLevel
 
         if (alcoholLevel > 0.0) {
             alcoholLevel -= ALCOHOL_REDUCE_PER_HOUR / HistoryActivity.AMOUNT_OF_REDUCES_PER_HOUR
 
-            if (alcoholLevelOld > 0.5 && alcoholLevel < 0.5) {
+            if (alcoholLevelBefore > 0.5 && alcoholLevel < 0.5) {
                 showNotification("Fahren erlaubt", "Du kannst wieder legal fahren")
             } else if (alcoholLevel <= 0.0) {
                 alcoholLevel = 0.0
@@ -70,15 +69,20 @@ class AlcoholReducerService : IntentService("AlcoholReducer") {
         }
 
         val intent = Intent(this, HistoryActivity::class.java)
-        val pendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification: Notification? = NotificationCompat.Builder(applicationContext, cId)
             // TODO (priority low): add a custom app icon for notifications
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(title)
             .setContentText(text)
-            .setContentIntent(pendingIntent)
+            .setContentIntent(
+                PendingIntent.getActivity(
+                    this,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
             .build()
 
         manager!!.notify(notificationId++, notification!!)

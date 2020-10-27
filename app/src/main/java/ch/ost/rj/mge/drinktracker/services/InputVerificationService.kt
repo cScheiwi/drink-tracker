@@ -10,13 +10,13 @@ class InputVerificationService {
             return editText?.text?.isNotEmpty()!! && editText.error == null
         }
 
+        fun hasValidInput(gender: Gender?): Boolean {
+            return gender != null
+        }
+
         fun hasValidNumberInput(editText: EditText?): Boolean {
             return editText?.text?.isNotEmpty()!! && editText.text?.toString()?.toDoubleOrNull()
                 ?.let { true } == true && editText.error == null
-        }
-
-        fun hasValidInput(gender: Gender?): Boolean {
-            return gender != null
         }
     }
 }

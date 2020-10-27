@@ -1,4 +1,4 @@
-package ch.ost.rj.mge.drinktracker.viewModel
+package ch.ost.rj.mge.drinktracker.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

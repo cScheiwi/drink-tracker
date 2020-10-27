@@ -14,7 +14,7 @@ import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.entity.Gender
 import ch.ost.rj.mge.drinktracker.entity.Person
 import ch.ost.rj.mge.drinktracker.services.InputVerificationService
-import ch.ost.rj.mge.drinktracker.viewModel.WelcomeViewModel
+import ch.ost.rj.mge.drinktracker.viewmodel.WelcomeViewModel
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -28,9 +28,10 @@ class WelcomeActivity : AppCompatActivity() {
     private var maleRadioButton: RadioButton? = null
     private var femaleRadioButton: RadioButton? = null
     private var selectedGender: Gender? = null
-    private lateinit var welcomeViewModel: WelcomeViewModel
 
     private var loginButton: View? = null
+
+    private lateinit var welcomeViewModel: WelcomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         nameEditText = findViewById(R.id.welcome_name_input)
-        nameEditText?.addTextChangedListener (object : TextWatcher {
+        nameEditText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -52,7 +53,7 @@ class WelcomeActivity : AppCompatActivity() {
         })
 
         weightEditText = findViewById(R.id.welcome_weight_picker)
-        weightEditText?.addTextChangedListener (object : TextWatcher {
+        weightEditText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -79,9 +80,13 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun updateLoginButton() {
         val nameEditTextIsValid: Boolean = InputVerificationService.hasValidInput(nameEditText)
-        val weightEditTextIsValid: Boolean = InputVerificationService.hasValidNumberInput(weightEditText)
-        val genderRadioButtonIsValid: Boolean = InputVerificationService.hasValidInput(selectedGender)
-        val buttonIsEnabled = nameEditTextIsValid && weightEditTextIsValid && genderRadioButtonIsValid
+        val weightEditTextIsValid: Boolean =
+            InputVerificationService.hasValidNumberInput(weightEditText)
+        val genderRadioButtonIsValid: Boolean =
+            InputVerificationService.hasValidInput(selectedGender)
+
+        val buttonIsEnabled =
+            nameEditTextIsValid && weightEditTextIsValid && genderRadioButtonIsValid
         val buttonAlpha: Float = if (buttonIsEnabled) FULL_VISIBLE_ALPHA else HALF_VISIBLE_ALPHA
         loginButton?.isEnabled = buttonIsEnabled
         loginButton?.alpha = buttonAlpha

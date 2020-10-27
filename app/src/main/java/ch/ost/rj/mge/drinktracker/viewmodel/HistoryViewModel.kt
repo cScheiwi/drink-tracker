@@ -1,4 +1,4 @@
-package ch.ost.rj.mge.drinktracker.viewModel
+package ch.ost.rj.mge.drinktracker.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -43,14 +43,6 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         drinkTemplates = drinkTemplateRepository.drinkTemplates
     }
 
-    fun insertDrink(drink: Drink) = viewModelScope.launch(Dispatchers.IO) {
-        drinkRepository.insert(drink)
-    }
-
-    fun deleteAllDrinks() {
-        drinkRepository.deleteAll()
-    }
-
     fun getQuantityByName(name: String): Double {
         return drinkTemplateRepository.getQuantityByName(name)
     }
@@ -67,7 +59,15 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         return drinkTemplateRepository.getAllNames()
     }
 
+    fun insertDrink(drink: Drink) = viewModelScope.launch(Dispatchers.IO) {
+        drinkRepository.insert(drink)
+    }
+
     fun updateUser(user: Person) {
         personRepository.update(user)
+    }
+
+    fun deleteAllDrinks() {
+        drinkRepository.deleteAll()
     }
 }

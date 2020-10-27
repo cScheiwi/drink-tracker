@@ -15,8 +15,4 @@ class PersonRepository(private val personDao: PersonDao) {
     fun update(user: Person) {
         personDao.update(user)
     }
-
-    fun delete(user: Person) {
-        personDao.delete(user)
-    }
 }

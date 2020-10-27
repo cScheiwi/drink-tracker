@@ -36,6 +36,7 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
+
             INSTANCE?.let { database ->
                 scope.launch {
 
@@ -126,7 +127,6 @@ abstract class DrinkTrackerDatabase : RoomDatabase() {
         private var INSTANCE: DrinkTrackerDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): DrinkTrackerDatabase {
-
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

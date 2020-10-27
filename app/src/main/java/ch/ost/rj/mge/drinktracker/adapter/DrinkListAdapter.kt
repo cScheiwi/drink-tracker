@@ -15,13 +15,13 @@ import java.time.format.DateTimeFormatter
 class DrinkListAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<DrinkListAdapter.DrinkViewHolder>() {
-    
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var drinks = emptyList<Drink>()
 
     @SuppressLint("SimpleDateFormat")
-    val dateTimeFormatter = SimpleDateFormat("dd MM yyyy HH:mm.ss")
-    
+    private val dateTimeFormatter = SimpleDateFormat("dd MM yyyy HH:mm.ss")
+
     inner class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val time: TextView = itemView.findViewById(R.id.adapter_history_datetime)
         val name: TextView = itemView.findViewById(R.id.adapter_history_drink_type)

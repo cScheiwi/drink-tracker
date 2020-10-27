@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.ost.rj.mge.drinktracker.services.AlcoholReducerAlarmReceiver
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.adapter.DrinkListAdapter
-import ch.ost.rj.mge.drinktracker.viewModel.HistoryViewModel
+import ch.ost.rj.mge.drinktracker.viewmodel.HistoryViewModel
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -25,6 +25,7 @@ class HistoryActivity : AppCompatActivity() {
 
     private var createButton: View? = null
     private var deleteAllButton: View? = null
+
     private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +72,7 @@ class HistoryActivity : AppCompatActivity() {
     private fun scheduleAlcoholReducer() {
         val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
 
-          // TODO 1 (optional): implement reactivation properly
+        // TODO 1 (optional): implement reactivation properly
 /*        if (PendingIntent.getBroadcast(
                 applicationContext,
                 AlcoholReducerAlarmReceiver.REQUEST_CODE,
@@ -79,20 +80,20 @@ class HistoryActivity : AppCompatActivity() {
                 PendingIntent.FLAG_NO_CREATE
             ) == null
         ) {*/
-            val pIntent = PendingIntent.getBroadcast(
-                this,
-                AlcoholReducerAlarmReceiver.REQUEST_CODE,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
+        val pIntent = PendingIntent.getBroadcast(
+            this,
+            AlcoholReducerAlarmReceiver.REQUEST_CODE,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-            val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarm.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis(),
-                (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),
-                pIntent
-            )
+        val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarm.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),
+            pIntent
+        )
 //        }
     }
 

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "drinkTemplate")
-class DrinkTemplate (
+class DrinkTemplate(
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "quantity") var quantity: Double,
     @ColumnInfo(name = "quantityUnit") var quantityUnit: QuantityUnit,
