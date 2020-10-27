@@ -10,7 +10,7 @@
         android:id="@+id/create_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/create_title"
         android:textSize="@dimen/app_title"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/create_input_amount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -59,13 +59,12 @@
         app:layout_constraintVertical_bias="0.466" />
 
 
-
     <Button
         android:id="@+id/create_button_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/app_confirm_button"
         android:textSize="@dimen/app_confirm_button"
         app:layout_constraintBottom_toBottomOf="parent"
