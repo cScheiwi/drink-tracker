@@ -4,19 +4,16 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ch.ost.rj.mge.drinktracker.services.AlcoholReducerAlarmReceiver
 import ch.ost.rj.mge.drinktracker.R
 import ch.ost.rj.mge.drinktracker.adapter.DrinkListAdapter
+import ch.ost.rj.mge.drinktracker.services.AlcoholReducerAlarmReceiver
 import ch.ost.rj.mge.drinktracker.viewmodel.HistoryViewModel
 
 class HistoryActivity : AppCompatActivity() {
@@ -38,19 +35,19 @@ class HistoryActivity : AppCompatActivity() {
 
         historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
-        noDrinks = findViewById(R.id.history_do_drinks_text)
+        noDrinks = findViewById(R.id.history_no_drinks_text)
 
         drinksRecyclerView = findViewById(R.id.history_drink_list)
         val adapter = DrinkListAdapter(this)
         drinksRecyclerView!!.adapter = adapter
         drinksRecyclerView!!.layoutManager = LinearLayoutManager(this)
 
-        historyViewModel.drinks.observe(this, Observer { drinks ->
+        historyViewModel.drinks.observe(this, { drinks ->
             drinks?.let { adapter.setDrinks(it) }
             changeHasDrinksVisible(drinks != null && drinks.isNotEmpty())
         })
 
-        historyViewModel.userLive.observe(this, Observer {
+        historyViewModel.userLive.observe(this, {
             val alcoholLevel = findViewById<TextView>(R.id.history_alcohol_level_text)
             val perMil = "%.2f".format(it.perMil).toDouble()
             alcoholLevel.text = perMil.toString()
@@ -70,8 +67,8 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun changeHasDrinksVisible(hasDrinks: Boolean) {
-            noDrinks!!.visibility = if (hasDrinks) View.INVISIBLE else View.VISIBLE
-            drinksRecyclerView!!.visibility  = if (hasDrinks) View.VISIBLE else View.INVISIBLE
+        noDrinks!!.visibility = if (hasDrinks) View.INVISIBLE else View.VISIBLE
+        drinksRecyclerView!!.visibility = if (hasDrinks) View.VISIBLE else View.INVISIBLE
     }
 
     private fun deleteAllDrinks() {
