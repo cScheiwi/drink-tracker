@@ -14,7 +14,7 @@
     <string name="history_datetime">Zeitpunkt</string>
     <string name="history_drink_type">Getränk</string>
     <string name="history_drink_amount">Menge</string>
-    <string name="history_reset_data">Getränke löschen</string>
+    <string name="history_reset_data">Daten löschen</string>
     <string name="history_alcohol_total_text">Total:</string>
     <string name="history_alcohol_level_text">Promille</string>
     <string name="history_text_default_alcohol_level">0</string>

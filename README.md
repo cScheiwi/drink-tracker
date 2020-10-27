@@ -5,32 +5,30 @@ A simple app to track your alcohol level and inform you when you're allowed to d
 ## Requirements / Features
 
 - Enter your name
-- Select your gender and select your weight
+- Select your weight and your gender
 - Information about the fact that the data are without guarantee
-- Possibility to add different types of different drinks in different sizes
+- Possibility to add different drinks with a pre-selected amount
+- Possibility to customize the amount of the drink
 - Show a list of all consumed drinks(timestamp, drink, amount)
 - Show the current alcohol level
-- A button to reset all
-- A button to reset a specific drink
-- Automatically lower total alcohol level every hour
-- Make a notification when the level is at 0.5 and one again at zero and the user can drive again
-- Dark- and white-theme switchable
+- A button to reset all drinks and the alcohol level
+- Automatically lower total alcohol level every quarter hour
+- Make a notification when the level reaches below 0.5 and another one at zero
+- Dark- and white-theme styling
 
 ## Screens
 
-- Welcome screen (personal data selection)
-- History screen (tracking system, history, button to add new drinks, button to reset data)
-- Create screen (add a new drink with a specific amount)  
+- A: Welcome screen (personal data selection)
+- B: History screen (alcohol reduce system, drink history, add button, reset all button)
+- C: Create screen (select new drink with a specific amount)
 
 ## Evaluation
 
-| Task                                          |  Evaluation   |  Total Evaluation |
-|  -------------------------------------------- | ------------- | ----------------- |
-| Use of Kotlin (per team member)               | 3             | 6                 |
-| functionality (per function / screen)         | 1-5           | 3-15              |
-| Persistency / Offline capability              | 1-3           | 1-3               |
-| Ressourcen: Unterschiedliche Styles           | 1-2           | 1-2               |
-| Use Notifications                             | 1-2           | 1-2               |
-| Integration of third-party components         | 1-3           | 1-3               |
-| Using Jetpack components                      | 1-3           | 1-3               |
-| **TOTAL**                                     |               | **14-34**         |
+| Task                                          |  Evaluation   |  Total Evaluation    |
+|  -------------------------------------------- | ------------- | -------------------  |
+| Use of Kotlin (per team member)               | 3             | 6                    |
+| Functionality (per function / screen)         | 1-5           | 6 (A: 1, B: 3, C: 2) |
+| Persistency / Offline capability              | 1-3           | 2                    |
+| Ressourcen: Unterschiedliche Styles           | 1-2           | 1                    |
+| Use Notifications                             | 1-2           | 1                    |
+| **TOTAL**                                     |               | **16**               |

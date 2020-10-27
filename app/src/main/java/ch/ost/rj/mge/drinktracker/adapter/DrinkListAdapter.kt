@@ -20,7 +20,7 @@ class DrinkListAdapter internal constructor(
     private var drinks = emptyList<Drink>()
 
     @SuppressLint("SimpleDateFormat")
-    private val dateTimeFormatter = SimpleDateFormat("dd MM yyyy HH:mm.ss")
+    private val dateTimeFormatter = SimpleDateFormat("dd MM yyyy HH:mm")
 
     inner class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val time: TextView = itemView.findViewById(R.id.adapter_history_datetime)

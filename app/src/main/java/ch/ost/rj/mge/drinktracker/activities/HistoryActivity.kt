@@ -20,7 +20,7 @@ import ch.ost.rj.mge.drinktracker.viewmodel.HistoryViewModel
 class HistoryActivity : AppCompatActivity() {
 
     companion object {
-        const val AMOUNT_OF_REDUCES_PER_HOUR = 60
+        const val AMOUNT_OF_REDUCES_PER_HOUR = 4
     }
 
     private var createButton: View? = null
