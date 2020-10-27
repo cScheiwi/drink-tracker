@@ -4,10 +4,12 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,8 @@ class HistoryActivity : AppCompatActivity() {
 
     private var createButton: View? = null
     private var deleteAllButton: View? = null
+    private var noDrinks: TextView? = null
+    private var drinksRecyclerView: RecyclerView? = null
 
     private lateinit var historyViewModel: HistoryViewModel
 
@@ -34,13 +38,16 @@ class HistoryActivity : AppCompatActivity() {
 
         historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
-        val drinksRecyclerView = findViewById<RecyclerView>(R.id.history_drink_list)
+        noDrinks = findViewById(R.id.history_do_drinks_text)
+
+        drinksRecyclerView = findViewById(R.id.history_drink_list)
         val adapter = DrinkListAdapter(this)
-        drinksRecyclerView.adapter = adapter
-        drinksRecyclerView.layoutManager = LinearLayoutManager(this)
+        drinksRecyclerView!!.adapter = adapter
+        drinksRecyclerView!!.layoutManager = LinearLayoutManager(this)
 
         historyViewModel.drinks.observe(this, Observer { drinks ->
             drinks?.let { adapter.setDrinks(it) }
+            changeHasDrinksVisible(drinks != null && drinks.isNotEmpty())
         })
 
         historyViewModel.userLive.observe(this, Observer {
@@ -60,6 +67,11 @@ class HistoryActivity : AppCompatActivity() {
         deleteAllButton?.setOnClickListener { deleteAllDrinks() }
 
         scheduleAlcoholReducer()
+    }
+
+    private fun changeHasDrinksVisible(hasDrinks: Boolean) {
+            noDrinks!!.visibility = if (hasDrinks) View.INVISIBLE else View.VISIBLE
+            drinksRecyclerView!!.visibility  = if (hasDrinks) View.VISIBLE else View.INVISIBLE
     }
 
     private fun deleteAllDrinks() {

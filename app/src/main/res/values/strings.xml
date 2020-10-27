@@ -18,6 +18,7 @@
     <string name="history_alcohol_total_text">Total:</string>
     <string name="history_alcohol_level_text">Promille</string>
     <string name="history_text_default_alcohol_level">0</string>
+    <string name="history_no_drinks">Noch keine Getränke erfasst</string>
 
     <string name="create_title">Getränk eintragen</string>
     <string name="create_select_drink">Getränk auswählen</string>
