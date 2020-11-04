@@ -51,6 +51,7 @@ class CreateActivity : AppCompatActivity() {
         quantityUnitTextView = findViewById(R.id.create_text_unit)
 
         drinksSpinner = findViewById(R.id.create_spinner_drinks)
+        // TODO: 04.11.2020 W03 Folie 51  Von ArrayAdapter eigene Klasse ableiten
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,

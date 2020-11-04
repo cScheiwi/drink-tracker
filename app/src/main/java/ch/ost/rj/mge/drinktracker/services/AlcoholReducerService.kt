@@ -1,7 +1,9 @@
 package ch.ost.rj.mge.drinktracker.services
 
 import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import ch.ost.rj.mge.drinktracker.R
@@ -30,7 +32,9 @@ class AlcoholReducerService : IntentService("AlcoholReducer") {
         var alcoholLevel: Double = person.perMil
         val alcoholLevelBefore = alcoholLevel
 
+        Log.i("AlcoholReducer", """Sie haben aktuell ${alcoholLevel} Promille""")
         if (alcoholLevel > 0.0) {
+            // TODO: 28.10.2020 nur für Präsentation 
             alcoholLevel -= ALCOHOL_REDUCE_PER_HOUR / HistoryActivity.AMOUNT_OF_REDUCES_PER_HOUR
 
             if (alcoholLevelBefore > 0.5 && alcoholLevel < 0.5) {
@@ -44,11 +48,13 @@ class AlcoholReducerService : IntentService("AlcoholReducer") {
             db.personDao().update(person)
         } else {
             // TODO 1 (optional): cancel alcohol reducer properly
-            // cancelAlcoholReducer()
+            cancelAlcoholReducer()
         }
     }
 
-/*    private fun cancelAlcoholReducer() {
+    private fun cancelAlcoholReducer() {
+        stopSelf();
+        /*
         val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
         val pIntent = PendingIntent.getBroadcast(
             this, AlcoholReducerAlarmReceiver.REQUEST_CODE,
@@ -56,7 +62,8 @@ class AlcoholReducerService : IntentService("AlcoholReducer") {
         )
         val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarm.cancel(pIntent)
-    }*/
+        */
+    }
 
     private fun showNotification(title: String, text: String) {
         if (manager == null) {

@@ -79,6 +79,7 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun scheduleAlcoholReducer() {
+        // todo Service implementation aus Woche 06 Folie 36 / Timer in On start Command & static boolean um nur einmal auszuführen
         val intent = Intent(applicationContext, AlcoholReducerAlarmReceiver::class.java)
 
         // TODO 1 (optional): implement reactivation properly
@@ -97,7 +98,7 @@ class HistoryActivity : AppCompatActivity() {
         )
 
         val alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarm.setInexactRepeating(
+        alarm.setRepeating(
             AlarmManager.RTC_WAKEUP,
             System.currentTimeMillis(),
             (60 / AMOUNT_OF_REDUCES_PER_HOUR * 60 * 1000).toLong(),

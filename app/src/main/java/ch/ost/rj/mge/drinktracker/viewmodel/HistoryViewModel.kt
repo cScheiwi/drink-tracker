@@ -20,6 +20,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     private val drinkRepository: DrinkRepository
     private val drinkTemplateRepository: DrinkTemplateRepository
 
+    // TODO: 04.11.2020 nur noch userLive verwenden 
     val userLive: LiveData<Person>
     val user: Person?
 
@@ -32,7 +33,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
         personRepository = PersonRepository(personDao)
         userLive = personRepository.liveUser
         user = personRepository.user
-
+        
         val drinkDao = DrinkTrackerDatabase.getDatabase(application, viewModelScope).drinkDao()
         drinkRepository = DrinkRepository(drinkDao)
         drinks = drinkRepository.drinks
