@@ -65,6 +65,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_drink_list"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/history_alcohol_level_amount"
         app:layout_constraintEnd_toEndOf="parent"
